@@ -385,9 +385,37 @@ function initPolaroidFeature() {
     if (!btn || !overlay || !canvas) return;
 
     const ctx = canvas.getContext('2d');
+    let loadedImages = [];
+    let currentImageIndex = 0;
+
+    // Preload all photos
+    const photoUrls = [
+        'assets/photos/love---c1b0a744-e94c-46e3-a5cf-0292dc6ed529.jpg',
+        'assets/photos/love---1294bd09-19cf-4238-8ea7-ba0fccbad7ef.jpg',
+        'assets/photos/love---39585646-d73a-4cbf-8163-2333bc7ff60d.jpg'
+    ];
+
+    let imagesLoaded = 0;
+    photoUrls.forEach((url, index) => {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = () => {
+            imagesLoaded++;
+            loadedImages[index] = img;
+        };
+        img.onerror = () => { imagesLoaded++; };
+        img.src = url;
+    });
+
+    canvas.addEventListener('click', () => {
+        if (loadedImages.length === 0) return;
+        currentImageIndex = (currentImageIndex + 1) % loadedImages.length;
+        if (loadedImages[currentImageIndex]) drawPolaroid(ctx, canvas, loadedImages[currentImageIndex]);
+    });
 
     btn.addEventListener('click', () => {
-        drawPolaroid(ctx, canvas);
+        if (loadedImages[currentImageIndex]) drawPolaroid(ctx, canvas, loadedImages[currentImageIndex]);
+        else if (loadedImages[0]) drawPolaroid(ctx, canvas, loadedImages[0]);
         overlay.classList.add('open');
     });
 
@@ -402,7 +430,7 @@ function initPolaroidFeature() {
     });
 }
 
-function drawPolaroid(ctx, canvas) {
+function drawPolaroid(ctx, canvas, imageObj) {
     const w = canvas.width, h = canvas.height;
     ctx.fillStyle = '#F5E6CA';
     ctx.fillRect(0, 0, w, h);
@@ -412,38 +440,53 @@ function drawPolaroid(ctx, canvas) {
     ctx.lineWidth = 8;
     ctx.strokeRect(20, 20, w - 40, h - 120);
 
-    // Inner image area
-    const grd = ctx.createLinearGradient(0, 30, 0, h - 160);
-    grd.addColorStop(0, '#F5E6CA');
-    grd.addColorStop(0.5, '#EBC8A2');
-    grd.addColorStop(1, '#A0522D');
-    ctx.fillStyle = grd;
-    ctx.fillRect(30, 30, w - 60, h - 160);
+    // Image area
+    const imgX = 35, imgY = 35, imgW = w - 70, imgH = h - 170;
+
+    // Draw photo if available
+    if (imageObj && imageObj.complete) {
+        ctx.drawImage(imageObj, imgX, imgY, imgW, imgH);
+        // Add vintage overlay
+        ctx.fillStyle = 'rgba(180, 140, 90, 0.2)';
+        ctx.fillRect(imgX, imgY, imgW, imgH);
+        // Add slight border effect
+        ctx.strokeStyle = 'rgba(139, 90, 43, 0.5)';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(imgX, imgY, imgW, imgH);
+    } else {
+        // Fallback gradient if no image
+        const grd = ctx.createLinearGradient(0, imgY, 0, imgY + imgH);
+        grd.addColorStop(0, '#F5E6CA');
+        grd.addColorStop(0.5, '#EBC8A2');
+        grd.addColorStop(1, '#A0522D');
+        ctx.fillStyle = grd;
+        ctx.fillRect(imgX, imgY, imgW, imgH);
+    }
 
     // Text
     ctx.fillStyle = '#7C2D12';
-    ctx.font = 'bold 24px "Cormorant Garamond", serif';
+    ctx.font = 'bold 20px "Cormorant Garamond", serif';
     ctx.textAlign = 'center';
-    ctx.fillText('Em là mùa thu của anh', w / 2, h - 90);
+    ctx.fillText('Em là mùa thu của anh', w / 2, h - 85);
 
     ctx.fillStyle = '#B45309';
-    ctx.font = '14px "Dancing Script", cursive';
-    ctx.fillText('"Dù bốn mùa có đổi thay,', w / 2, h - 60);
+    ctx.font = '13px "Dancing Script", cursive';
+    ctx.fillText('"Dù bốn mùa có đổi thay,', w / 2, h - 58);
     ctx.fillText('anh vẫn muốn dừng lại', w / 2, h - 42);
-    ctx.fillText('ở mùa thu mang tên em."', w / 2, h - 24);
-    ctx.font = '12px "Dancing Script", cursive';
-    ctx.fillText('— Sunset', w / 2, h - 8);
+    ctx.fillText('ở mùa thu mang tên em."', w / 2, h - 26);
+    ctx.font = '11px "Dancing Script", cursive';
+    ctx.fillText('— Sunset', w / 2, h - 12);
 
     // Date
     ctx.fillStyle = '#2B2B2B';
-    ctx.font = '12px "Quicksand", sans-serif';
+    ctx.font = '11px "Quicksand", sans-serif';
     const now = new Date();
-    ctx.fillText(now.toLocaleDateString('vi-VN', { day: '2-digit', month: 'long', year: 'numeric' }), w / 2, h - 140);
+    ctx.fillText(now.toLocaleDateString('vi-VN', { day: '2-digit', month: 'long', year: 'numeric' }), w / 2, h - 135);
 
     // Decorative leaves
     ['🍂', '🍁'].forEach((leaf, i) => {
-        ctx.font = '30px serif';
-        ctx.fillText(leaf, 50 + i * (w - 100), h - 110);
+        ctx.font = '28px serif';
+        ctx.fillText(leaf, 55 + i * (w - 110), h - 105);
     });
 }
 
