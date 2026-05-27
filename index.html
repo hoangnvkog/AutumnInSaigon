@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="Em l\u00e0 m\u00f9a thu c\u1ee7a anh - M\u1ed9t m\u00f3n qu\u00e0 t\u00ecnh c\u1ea3m d\u00e0nh cho ng\u01b0\u1eddi anh y\u00eau">
+    <meta name="theme-color" content="#F5E6CA">
+    <title>Em l\u00e0 m\u00f9a thu c\u1ee7a anh \ud83c\udf42</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Quicksand:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.min.js" defer></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-leaves">
+            <div class="loading-leaf leaf-1">🍂</div>
+            <div class="loading-leaf leaf-2">🍁</div>
+            <div class="loading-leaf leaf-3">🍂</div>
+        </div>
+        <div class="loading-text">
+            <span class="loading-letter">M</span>
+            <span class="loading-letter">ù</span>
+            <span class="loading-letter">a</span>
+            <span class="loading-letter">&nbsp;</span>
+            <span class="loading-letter">t</span>
+            <span class="loading-letter">h</span>
+            <span class="loading-letter">u</span>
+            <span class="loading-letter">&nbsp;</span>
+            <span class="loading-letter">đ</span>
+            <span class="loading-letter">a</span>
+            <span class="loading-letter">n</span>
+            <span class="loading-letter">g</span>
+            <span class="loading-letter">&nbsp;</span>
+            <span class="loading-letter">đ</span>
+            <span class="loading-letter">ế</span>
+            <span class="loading-letter">n</span>
+            <span class="loading-letter">.</span>
+            <span class="loading-letter">.</span>
+            <span class="loading-letter">.</span>
+        </div>
+    </div>
+
+    <!-- Cursor Autumn Leaf -->
+    <div id="custom-cursor"></div>
+
+    <!-- Audio -->
+    <audio id="bg-music" loop preload="none">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808f2a047.mp3?filename=soft-piano-100-bpm-121529.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Audio Controls -->
+    <div id="audio-controls" class="audio-controls">
+        <button id="audio-btn" class="audio-btn" title="Bật/tắt nhạc">
+            <i class="fas fa-music"></i>
+        </button>
+        <div class="audio-wave">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+
+    <!-- Navigation Dots -->
+    <nav id="nav-dots" class="nav-dots">
+        <a href="#hero" data-section="hero" class="nav-dot active" title="Chiều đầu tiên"></a>
+        <a href="#timeline" data-section="timeline" class="nav-dot" title="Những ngày lá vàng"></a>
+        <a href="#letter" data-section="letter" class="nav-dot" title="Hộp thư mùa thu"></a>
+        <a href="#night-sky" data-section="night-sky" class="nav-dot" title="Bầu trời bí mật"></a>
+        <a href="#final" data-section="final" class="nav-dot" title="Mùa thu sẽ luôn ở đây"></a>
+    </nav>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section id="hero" class="hero">
+        <!-- Canvas Background -->
+        <canvas id="hero-canvas" class="hero-canvas"></canvas>
+        
+        <!-- Floating Leaves -->
+        <div class="floating-leaves">
+            <div class="leaf" style="--i:0; left: 5%; animation-duration: 12s; animation-delay: 0s; font-size: 1.2rem;">🍂</div>
+            <div class="leaf" style="--i:1; left: 15%; animation-duration: 15s; animation-delay: 2s; font-size: 0.8rem;">🍁</div>
+            <div class="leaf" style="--i:2; left: 25%; animation-duration: 10s; animation-delay: 1s; font-size: 1.5rem;">🍂</div>
+            <div class="leaf" style="--i:3; left: 35%; animation-duration: 13s; animation-delay: 4s; font-size: 1rem;">🍁</div>
+            <div class="leaf" style="--i:4; left: 45%; animation-duration: 11s; animation-delay: 3s; font-size: 1.3rem;">🍂</div>
+            <div class="leaf" style="--i:5; left: 55%; animation-duration: 14s; animation-delay: 5s; font-size: 0.9rem;">🍁</div>
+            <div class="leaf" style="--i:6; left: 65%; animation-duration: 12s; animation-delay: 2.5s; font-size: 1.1rem;">🍂</div>
+            <div class="leaf" style="--i:7; left: 75%; animation-duration: 16s; animation-delay: 6s; font-size: 1.4rem;">🍁</div>
+            <div class="leaf" style="--i:8; left: 85%; animation-duration: 9s; animation-delay: 1.5s; font-size: 0.7rem;">🍂</div>
+            <div class="leaf" style="--i:9; left: 95%; animation-duration: 13s; animation-delay: 7s; font-size: 1.6rem;">🍁</div>
+            <div class="leaf" style="--i:10; left: 7%; animation-duration: 11s; animation-delay: 4s; font-size: 1.1rem;">🍂</div>
+            <div class="leaf" style="--i:11; left: 19%; animation-duration: 14s; animation-delay: 6s; font-size: 0.9rem;">🍁</div>
+            <div class="leaf" style="--i:12; left: 31%; animation-duration: 10s; animation-delay: 3.5s; font-size: 1.2rem;">🍂</div>
+            <div class="leaf" style="--i:13; left: 43%; animation-duration: 13s; animation-delay: 5s; font-size: 0.8rem;">🍁</div>
+            <div class="leaf" style="--i:14; left: 51%; animation-duration: 15s; animation-delay: 2s; font-size: 1.3rem;">🍂</div>
+            <div class="leaf" style="--i:15; left: 63%; animation-duration: 11s; animation-delay: 7s; font-size: 1rem;">🍁</div>
+            <div class="leaf" style="--i:16; left: 71%; animation-duration: 12s; animation-delay: 1s; font-size: 1.5rem;">🍂</div>
+            <div class="leaf" style="--i:17; left: 81%; animation-duration: 14s; animation-delay: 4.5s; font-size: 0.9rem;">🍁</div>
+            <div class="leaf" style="--i:18; left: 91%; animation-duration: 10s; animation-delay: 3s; font-size: 1.1rem;">🍂</div>
+            <div class="leaf" style="--i:19; left: 3%; animation-duration: 16s; animation-delay: 8s; font-size: 1.3rem;">🍁</div>
+        </div>
+
+        <div class="hero-content">
+            <div class="hero-text">
+                <p class="hero-subtitle">Trong trái tim anh,</p>
+                <h1 class="hero-title">
+                    <span class="line-1">Nếu phải gọi một mùa</span>
+                    <span class="line-2">bằng tên em...</span>
+                </h1>
+                <p class="hero-tagline">anh sẽ gọi đó là <span class="highlight">mùa thu.</span></p>
+                <div class="hero-divider">
+                    <span class="leaf-icon">🍂</span>
+                </div>
+                <a href="#timeline" class="hero-cta">
+                    <span class="cta-text">Bước vào mùa thu của anh</span>
+                    <span class="cta-arrow">↓</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+            <span class="scroll-text">Lăn chuột xuống</span>
+        </div>
+    </section>
+
+    <!-- ===== LOVE TIMELINE ===== -->
+    <section id="timeline" class="timeline-section">
+        <div class="timeline-bg-gradient"></div>
+        <div class="timeline-container">
+            <div class="section-header">
+                <span class="section-label">Ký ức</span>
+                <h2 class="section-title">Những ngày lá vàng</h2>
+                <p class="section-desc">Mỗi chiếc lá là một khoảnh khắc anh muốn giữ lại mãi.</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-line"></div>
+                
+                <!-- Item 1 -->
+                <div class="timeline-item" data-side="right">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="card-leaf">🍂</div>
+                        <div class="card-date">
+                            <span class="card-day">15</span>
+                            <span class="card-month">Tháng Tám</span>
+                        </div>
+                        <h3 class="card-title">Ngày đầu gặp em</h3>
+                        <div class="card-divider"></div>
+                        <p class="card-desc">Mình gặp nhau vào một buổi chiều gió nhẹ. Em đứng dưới tán cây sấu, nắng chiếu qua kẽ lá tỏa lên mái tóc em. Anh đã biết, mình đã gặp được điều gì đó đặc biệt.</p>
+                        <div class="card-image">
+                            <span class="card-placeholder">🍁</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="timeline-item" data-side="left">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="card-leaf">🍁</div>
+                        <div class="card-date">
+                            <span class="card-day">03</span>
+                            <span class="card-month">Tháng Chín</span>
+                        </div>
+                        <h3 class="card-title">Lần đầu em cười với anh</h3>
+                        <div class="card-divider"></div>
+                        <p class="card-desc">Nụ cười của em như ánh nắng xuyên qua những đám mây thu. Anh bất chợt hiểu, lý do anh thích mùa thu không phải vì lá vàng rơi, mà vì em đang ở đó.</p>
+                        <div class="card-image">
+                            <span class="card-placeholder">☕</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="timeline-item" data-side="right">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="card-leaf">🍂</div>
+                        <div class="card-date">
+                            <span class="card-day">21</span>
+                            <span class="card-month">Tháng Chín</span>
+                        </div>
+                        <h3 class="card-title">Ngày anh biết mình yêu em</h3>
+                        <div class="card-divider"></div>
+                        <p class="card-desc">Khi anh đi qua những con phố cũ lúc chiều tà, những chiếc lá rơi trên vai, anh nhận ra mình đang nghĩ về em. Lúc ấy, anh đã biết trái tim mình đi về đâu rồi.</p>
+                        <div class="card-image">
+                            <span class="card-placeholder">💫</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="timeline-item" data-side="left">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="card-leaf">🍁</div>
+                        <div class="card-date">
+                            <span class="card-day">12</span>
+                            <span class="card-month">Tháng Mười</span>
+                        </div>
+                        <h3 class="card-title">Buổi chiều cà phê đầu tiên</h3>
+                        <div class="card-divider"></div>
+                        <p class="card-desc">Quán cà phê nhỏ góc phố, tiếng mưa rơi tí tách ngoài hiên. Em ngồi đối diện, tay cầm chiếc cốc sứ nhỏ. Đó là khoảnh khắc anh muốn được lặp đi lặp lại mãi.</p>
+                        <div class="card-image">
+                            <span class="card-placeholder">☕</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="timeline-item" data-side="right">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="card-leaf">🍂</div>
+                        <div class="card-date">
+                            <span class="card-day">05</span>
+                            <span class="card-month">Tháng Mười Một</span>
+                        </div>
+                        <h3 class="card-title">Hứa đi cùng nhau qua nhiều mùa</h3>
+                        <div class="card-divider"></div>
+                        <p class="card-desc">Anh không biết tương lai sẽ đưa chúng ta đi đâu. Nhưng anh biết, chỉ cần có em ở bên, mùa thu sẽ luôn đẹp như ngày đầu tiên.</p>
+                        <div class="card-image">
+                            <span class="card-placeholder">🌅</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LETTER SECTION ===== -->
+    <section id="letter" class="letter-section">
+        <div class="letter-bg-pattern"></div>
+        <div class="letter-floating-leaves">
+            <div class="fl-leaf" style="left: 5%; animation-delay: 0s;">🍂</div>
+            <div class="fl-leaf" style="left: 12%; animation-delay: 1.5s;">🍁</div>
+            <div class="fl-leaf" style="left: 25%; animation-delay: 3s;">🍂</div>
+            <div class="fl-leaf" style="left: 38%; animation-delay: 0.8s;">🍁</div>
+            <div class="fl-leaf" style="left: 55%; animation-delay: 2.2s;">🍂</div>
+            <div class="fl-leaf" style="left: 68%; animation-delay: 1s;">🍁</div>
+            <div class="fl-leaf" style="left: 78%; animation-delay: 3.5s;">🍂</div>
+            <div class="fl-leaf" style="left: 88%; animation-delay: 0.5s;">🍁</div>
+            <div class="fl-leaf" style="left: 94%; animation-delay: 2.8s;">🍂</div>
+        </div>
+
+        <div class="letter-container">
+            <div class="section-header letter-header">
+                <span class="section-label">Tâm sự</span>
+                <h2 class="section-title">Hộp thư mùa thu</h2>
+                <p class="section-desc">Mỗi lá thư là một tâm sự chưa kể.</p>
+            </div>
+
+            <div class="envelope-wrapper">
+                <!-- Envelope Back -->
+                <div class="envelope-back"></div>
+                
+                <!-- Letter Paper -->
+                <div class="letter-paper" id="letter-paper">
+                    <div class="paper-header">
+                        <span class="paper-stamp">💌</span>
+                        <span class="paper-date" id="letter-date"></span>
+                    </div>
+                    <div class="paper-divider"></div>
+                    <div class="letter-content" id="letter-content">
+                        <p class="letter-greeting">Gửi em,</p>
+                        <p class="letter-paragraph">Em có biết không, mỗi lần mưa rơi, anh lại nhớ đến nụ cười của em. Không phải vì em giống mưa, mà vì cả hai đều mang đến thứ gì đó đẹp đẽ từ trên cao.</p>
+                        <p class="letter-paragraph">Em giống như những chiếc lá mùa thu vậy - vừa quen thuộc lại vừa khiến anh ngỡ ngàng mỗi lần nhìn thấy. Anh nhìn em qua từng sự kiện, từng mùa thay đổi, mà vẫn không chịu được việc rời mắt.</p>
+                        <p class="letter-paragraph">Anh cứ nghĩ, nếu có một từ để mô tả em, thì đó sẽ là "nhẹ nhàng". Như gió thu, như ánh chiều, như tất cả những gì đẹp nhất trên đời này.</p>
+                        <p class="letter-paragraph">Em không cần biết nhiều điều. Chỉ cần biết, trong mắt anh, em là cả một mùa thu rực rỡ.</p>
+                        <p class="letter-closing">
+                            <span class="closing-words">Yêu em,</span>
+                            <span class="closing-signature">Anh</span>
+                        </p>
+                    </div>
+                    <div class="paper-footer">
+                        <span class="paper-deco">✿</span>
+                    </div>
+                </div>
+
+                <!-- Envelope Front -->
+                <div class="envelope-front" id="envelope-front">
+                    <div class="envelope-flap" id="envelope-flap">
+                        <div class="envelope-seal">💌</div>
+                    </div>
+                    <div class="envelope-body">
+                        <span class="envelope-text">Mở thư để xem nhé 💌</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECRET NIGHT SKY ===== -->
+    <section id="night-sky" class="night-sky-section">
+        <canvas id="star-canvas" class=" star-canvas"></canvas>
+        <div class="star-overlay"></div>
+        
+        <div class="night-content">
+            <div class="section-header night-header">
+                <span class="section-label luminescent-label">Bầu trời</span>
+                <h2 class="section-title" style="color: #F5E6CA;">Bầu trời bí mật</h2>
+                <p class="section-desc" style="color: rgba(245, 230, 202, 0.6);">Hãy nhấn vào những ngôi sao để khám phá.</p>
+            </div>
+
+            <div class="stars-container" id="stars-container">
+                <!-- Stars will be generated by JS -->
+            </div>
+        </div>
+
+        <!-- Star Tooltip -->
+        <div class="star-tooltip" id="star-tooltip">
+            <div class="tooltip-content">
+                <div class="tooltip-quote"></div>
+                <div class="tooltip-author"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FINAL SECTION ===== -->
+    <section id="final" class="final-section">
+        <div class="final-bg"></div>
+        
+        <div class="final-content">
+            <div class="maple-tree-container">
+                <div class="maple-tree" id="maple-tree">
+                    <!-- Leaves generated by JS - words will be placed here -->
+                </div>
+            </div>
+
+            <div class="final-quote">
+                <blockquote class="quote-text">
+                    "Dù bốn mùa có đổi thay,<br>
+                    anh vẫn muốn dừng lại<br>
+                    ở mùa thu mang tên em."
+                </blockquote>
+                <cite class="quote-author">— Tô Khất Nhi</cite>
+            </div>
+
+            <div class="final-actions">
+                <button class="polaroid-btn" id="polaroid-btn">
+                    <span class="btn-icon">📷</span>
+                    <span class="btn-text">Giữ mùa thu này lại</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Falling Leaves Background -->
+        <div class="final-falling-leaves" id="final-falling-leaves"></div>
+    </section>
+
+    <!-- Polaroid Modal -->
+    <div class="polaroid-overlay" id="polaroid-overlay">
+        <div class="polaroid-modal">
+            <button class="polaroid-close" id="polaroid-close">&times;</button>
+            <div class="polaroid-canvas-wrapper">
+                <canvas id="polaroid-canvas" width="400" height="500"></canvas>
+            </div>
+            <div class="polaroid-actions">
+                <button class="download-btn" id="download-btn">
+                    <i class="fas fa-download"></i>
+                    Tải ảnh xuống
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="main-footer">
+        <div class="footer-leaves">🍂 🍁 🍂 🍁 🍂</div>
+        <p class="footer-text">Mùa thu này, và mãi mãi về sau.</p>
+        <div class="footer-hearts">❤️</div>
+    </footer>
+
+    <!-- Easter Egg: Hidden Canvas for name animation -->
+    <canvas id="easter-egg-canvas" style="position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; opacity: 0;"></canvas>
+
+    <!-- Script -->
+    <script src="script.js"></script>
+</body>
+</html>
