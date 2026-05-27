@@ -330,7 +330,7 @@ function initFinalSection() {
 
     const leaves = [
         { text: 'Em', x: 40, y: 10 },
-        { text: '15/08', x: 65, y: 25 },
+        { text: '18/04', x: 65, y: 25 },
         { text: 'Ấm áp', x: 20, y: 35 },
         { text: 'Dịu dàng', x: 50, y: 45 },
         { text: 'Bình yên', x: 75, y: 55 },
@@ -423,7 +423,6 @@ function drawPolaroid(ctx, canvas) {
     ctx.strokeRect(20, 20, w - 40, h - 120);
 
     // Inner image area
-    ctx.fillStyle = 'linear-gradient(180deg, #F5E6CA 0%, #D4945E 50%, #7C2D12 100%)';
     const grd = ctx.createLinearGradient(0, 30, 0, h - 160);
     grd.addColorStop(0, '#F5E6CA');
     grd.addColorStop(0.5, '#EBC8A2');
@@ -435,24 +434,26 @@ function drawPolaroid(ctx, canvas) {
     ctx.fillStyle = '#7C2D12';
     ctx.font = 'bold 24px "Cormorant Garamond", serif';
     ctx.textAlign = 'center';
-    ctx.fillText('Em là mùa thu của anh', w / 2, h - 80);
+    ctx.fillText('Em là mùa thu của anh', w / 2, h - 90);
 
     ctx.fillStyle = '#B45309';
-    ctx.font = '16px "Dancing Script", cursive';
-    ctx.fillText('"Dù bốn mùa có đổi thay,', w / 2, h - 50);
-    ctx.fillText('anh vẫn muốn dừng lại', w / 2, h - 30);
-    ctx.fillText('ở mùa thu mang tên em."', w / 2, h - 10);
+    ctx.font = '14px "Dancing Script", cursive';
+    ctx.fillText('"Dù bốn mùa có đổi thay,', w / 2, h - 60);
+    ctx.fillText('anh vẫn muốn dừng lại', w / 2, h - 42);
+    ctx.fillText('ở mùa thu mang tên em."', w / 2, h - 24);
+    ctx.font = '12px "Dancing Script", cursive';
+    ctx.fillText('— Sunset', w / 2, h - 8);
 
     // Date
     ctx.fillStyle = '#2B2B2B';
     ctx.font = '12px "Quicksand", sans-serif';
     const now = new Date();
-    ctx.fillText(now.toLocaleDateString('vi-VN', { day: '2-digit', month: 'long', year: 'numeric' }), w / 2, h - 130);
+    ctx.fillText(now.toLocaleDateString('vi-VN', { day: '2-digit', month: 'long', year: 'numeric' }), w / 2, h - 140);
 
     // Decorative leaves
     ['🍂', '🍁'].forEach((leaf, i) => {
         ctx.font = '30px serif';
-        ctx.fillText(leaf, 50 + i * (w - 100), h - 100);
+        ctx.fillText(leaf, 50 + i * (w - 100), h - 110);
     });
 }
 
