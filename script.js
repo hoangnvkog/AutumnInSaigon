@@ -22,18 +22,21 @@ document.addEventListener('DOMContentLoaded', () => {
 /* ========== LOADING SCREEN ========== */
 function initLoadingScreen() {
     const loadingScreen = document.getElementById('loading-screen');
-    const letters = document.querySelectorAll('.loading-letter');
+    if (!loadingScreen) return;
     
+    const letters = document.querySelectorAll('.loading-letter');
     letters.forEach((letter, index) => {
         letter.style.animationDelay = `${index * 0.05}s`;
     });
 
-    window.addEventEventListener('load', () => {
-        setTimeout(() => {
-            loadingScreen.classList.add('fade-out');
-            setTimeout(() => { loadingScreen.style.display = 'none'; }, 1000);
-        }, 2000);
-    });
+    // Fallback timeout - hide after 3 seconds max
+    const hideLoading = () => {
+        loadingScreen.classList.add('fade-out');
+        setTimeout(() => { loadingScreen.style.display = 'none'; }, 1000);
+    };
+
+    // Set timeout as primary - 3 seconds max
+    setTimeout(hideLoading, 3000);
 }
 
 /* ========== CUSTOM CURSOR ========== */
@@ -107,7 +110,6 @@ function initAudioControls() {
         }
         isPlaying = !isPlaying;
     });
-}
 }
 
 /* ========== SMOOTH SCROLL ========== */
