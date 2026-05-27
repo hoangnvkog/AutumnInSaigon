@@ -65,39 +65,49 @@ function initCustomCursor() {
     });
 }
 
-/* ========== AUDIO CONTROLS ========== */
+/* ========== AUDIO CONTROLS (YouTube) ========== */
 function initAudioControls() {
-    const audio = document.getElementById('bg-music');
     const btn = document.getElementById('audio-btn');
     const controls = document.getElementById('audio-controls');
-    if (!audio || !btn) return;
+    const ytPlayer = document.getElementById('yt-embed');
+    if (!btn || !ytPlayer) return;
 
     let isPlaying = false;
 
+    // YouTube API - load iframe API
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    let player;
+    window.onYouTubeIframeAPIReady = function() {
+        player = new YT.Player('yt-embed', {
+            events: {
+                'onReady': function() {
+                    player.setVolume(50);
+                }
+            }
+        });
+    };
+
     btn.addEventListener('click', () => {
+        if (!player || !player.playVideo) return;
+        
         if (isPlaying) {
-            audio.pause();
+            player.pauseVideo();
             btn.classList.remove('playing');
             controls.classList.remove('playing');
             btn.innerHTML = '<i class="fas fa-music"></i>';
         } else {
-            audio.play().catch(() => {});
+            player.playVideo();
             btn.classList.add('playing');
             controls.classList.add('playing');
             btn.innerHTML = '<i class="fas fa-pause"></i>';
         }
         isPlaying = !isPlaying;
     });
-
-    // Try autoplay (muted first for browser policy)
-    audio.volume = 0.5;
-    audio.muted = true;
-    audio.play().then(() => {
-        audio.muted = false;
-        btn.classList.add('playing');
-        controls.classList.add('playing');
-        isPlaying = true;
-    }).catch(() => {});
+}
 }
 
 /* ========== SMOOTH SCROLL ========== */

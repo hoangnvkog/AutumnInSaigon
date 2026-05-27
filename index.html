@@ -56,9 +56,11 @@
     <div id="custom-cursor"></div>
 
     <!-- Audio -->
-    <audio id="bg-music" loop preload="none">
-        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808f2a047.mp3?filename=soft-piano-100-bpm-121529.mp3" type="audio/mpeg">
-    </audio>
+    <!-- YouTube Audio Embed -->
+    <div id="yt-player" style="display:none;">
+        <iframe id="yt-embed" width="1" height="1" src="https://www.youtube.com/embed/jg2n-DqW3jM?enablejsapi=1&loop=1&playlist=jg2n-DqW3jM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <!-- Hidden YouTube player - controlled via JS -->
 
     <!-- Audio Controls -->
     <div id="audio-controls" class="audio-controls">
