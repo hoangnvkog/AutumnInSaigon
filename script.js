@@ -385,37 +385,17 @@ function initPolaroidFeature() {
     if (!btn || !overlay || !canvas) return;
 
     const ctx = canvas.getContext('2d');
-    let loadedImages = [];
-    let currentImageIndex = 0;
 
-    // Preload all photos
-    const photoUrls = [
-        'assets/photos/love---c1b0a744-e94c-46e3-a5cf-0292dc6ed529.jpg',
-        'assets/photos/love---1294bd09-19cf-4238-8ea7-ba0fccbad7ef.jpg',
-        'assets/photos/love---39585646-d73a-4cbf-8163-2333bc7ff60d.jpg'
-    ];
-
-    let imagesLoaded = 0;
-    photoUrls.forEach((url, index) => {
-        const img = new Image();
-        img.crossOrigin = 'anonymous';
-        img.onload = () => {
-            imagesLoaded++;
-            loadedImages[index] = img;
-        };
-        img.onerror = () => { imagesLoaded++; };
-        img.src = url;
-    });
-
-    canvas.addEventListener('click', () => {
-        if (loadedImages.length === 0) return;
-        currentImageIndex = (currentImageIndex + 1) % loadedImages.length;
-        if (loadedImages[currentImageIndex]) drawPolaroid(ctx, canvas, loadedImages[currentImageIndex]);
-    });
+    // Load single photo
+    const photoUrl = 'assets/photos/polaroid-main.png';
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => { drawPolaroid(ctx, canvas, img); };
+    img.onerror = () => {};
+    img.src = photoUrl;
 
     btn.addEventListener('click', () => {
-        if (loadedImages[currentImageIndex]) drawPolaroid(ctx, canvas, loadedImages[currentImageIndex]);
-        else if (loadedImages[0]) drawPolaroid(ctx, canvas, loadedImages[0]);
+        if (img.complete && img.naturalWidth > 0) drawPolaroid(ctx, canvas, img);
         overlay.classList.add('open');
     });
 
